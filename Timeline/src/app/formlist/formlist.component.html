@@ -1,0 +1,62 @@
+<div>
+  <button class="button" type> Revenir à la liste des Timelines </button>
+</div>
+<div>
+  <button class="button" type> Ajouter un TimeLine </button>
+</div>
+<div>
+  <form [formGroup]="gameForm" (ngSubmit)="onNewTimeLine()">
+
+    <body>
+      <div>
+        <table>
+          <tr>
+            <th> id </th>
+            <th>
+              Nom
+            </th>
+            <th>
+              Categorie
+            </th>
+            <th>
+              Date de création
+            </th>
+            <th>
+              Date de Maj
+            </th>
+            <th>
+              Nombre de carte
+            </th>
+            <th>
+              Editer ?
+            </th>
+            <th>
+              Jouer !
+            </th>
+            <th>
+              Supprimer ?
+            </th>
+          </tr>
+          <tr>
+          <tr *ngFor="let game of games;let i=index">
+            <td>{{game.id}}</td>
+            <td>{{game.name}}</td>
+            <td>{{game.creationDate}}</td>
+            <td>{{game.updateDate}}</td>
+            <td>{{game.category}}</td>
+            <td>numberOfCards</td>
+            <td>
+              <button class="button" type> Editer </button>
+            </td>
+            <td>
+              <button class="button" type> Jouer </button>
+            </td>
+            <td>
+              <button (click)="games.splice(i, 1)">supprimer</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </body>
+  </form>
+</div>
