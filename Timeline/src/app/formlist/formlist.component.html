@@ -1,7 +1,4 @@
 <div>
-  <button class="button" type> Revenir à la liste des Timelines </button>
-</div>
-<div>
   <button class="button" type> Ajouter un TimeLine </button>
 </div>
 <div>
@@ -38,13 +35,13 @@
             </th>
           </tr>
           <tr>
-          <tr *ngFor="let game of games;let i=index">
+          <tr *ngFor=" let game of games | async; let i = index">
             <td>{{game.id}}</td>
             <td>{{game.name}}</td>
             <td>{{game.creationDate}}</td>
             <td>{{game.updateDate}}</td>
             <td>{{game.category}}</td>
-            <td>numberOfCards</td>
+            <td>{{game.cardList.length}}</td>
             <td>
               <button class="button" type> Editer </button>
             </td>
@@ -52,8 +49,8 @@
               <button class="button" type> Jouer </button>
             </td>
             <td>
-              <button (click)="games.splice(i, 1)">supprimer</button>
-            </td>
+                <button (click)="deletee(i)">supprimer</button>
+              </td>
           </tr>
         </table>
       </div>
