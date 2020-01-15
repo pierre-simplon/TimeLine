@@ -4,12 +4,13 @@ import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 
+
+
 @Injectable({
   providedIn: "root"
 })
 export class GamesService {
-  gamess: Timeline[];
-
+  gamess: Timeline[] = [];
   games: Observable<
     Timeline[]
   >; /* =

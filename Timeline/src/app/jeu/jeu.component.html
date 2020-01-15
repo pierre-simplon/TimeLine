@@ -1,46 +1,28 @@
 
-<div>
-  <button class="button"><a routerLink=''>  Revenir à la liste des Timelines  </a></button>
+ <!--<button type(clic)= "afficheimg()">afficheimf </button>-->
 
-  <form [formGroup]="jeuForm" (ngSubmit)="onReponse()">
+<div>
+
+  <form [formGroup]="jeuForm" (ngSubmit)="onReponse(jeuForm.value)">
     <body>
       <div>
-        <h1>
-          Carte à deviner
-        </h1>
-        <input type="number" formControlName="reponse">
-        <table>
-          <tr>
-            <th> id </th>
-            <th>
-              Nom
-            </th>
-            <th>
-              Categorie
-            </th>
-            <th>
-              Date de création
-            </th>
-            <th>
-              Date de Maj
-            </th>
-            <th>
-              Nombre de carte
-            </th>
-            <th>
-              Editer ?
-            </th>
-            <th>
-              Jouer !
-            </th>
-            <th>
-              Supprimer ?
-            </th>
-          </tr>
-          <tr>
-          </tr>
-        </table>
+        <input placeholder="Entrez la date" type="string" formControlName="reponse">
+
+        <button type="submit"> Deviner </button>
       </div>
     </body>
   </form>
 </div>
+<h1>
+  Carte à deviner
+</h1>
+<table>
+  <tr>
+    <td>
+      <img [src]="cheminURL" width="240" height="300" alt="l'image">
+    </td>
+  </tr>
+</table>
+
+
+

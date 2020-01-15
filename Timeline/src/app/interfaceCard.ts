@@ -1,7 +1,7 @@
 export interface Card {
-  identifierModuleUrl: number,
-  name: string,
-  datecard: string,
-  imageUrl: string,
-  description: string
+  identifierModuleUrl: number;
+  name: string;
+  date: string;
+  imageUrl: string;
+  description: string;
 }

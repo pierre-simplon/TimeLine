@@ -6,7 +6,7 @@ import { JeuComponent } from './jeu/jeu.component';
 
 const routes: Routes = [
   { path: '', component: FormlistComponent },
-  { path: 'jeu', component: JeuComponent},
+  { path: 'jeu/:id', component: JeuComponent},
 ];
 
 @NgModule({
