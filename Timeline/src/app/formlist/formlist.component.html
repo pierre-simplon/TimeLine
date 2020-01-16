@@ -1,6 +1,13 @@
 <div>
-  <button class="button"> Ajouter un TimeLine </button>
+ <!--
+  <button class="button"> Ajouter un TimeLine
+ -->
+  <button class="button" routerLink='editeur'> Ajouter un TimeLine </button>
+
+
+
 </div>
+
 <div>
   <form [formGroup]="gameForm" (ngSubmit)="onNewTimeLine()">
 
@@ -43,13 +50,17 @@
             <td>{{game.category}}</td>
             <td>{{game.cardList.length}}</td>
             <td>
+
               <button class="button" type> Editer </button>
+
+
+
             </td>
             <td>
               <button class="button" [routerLink]="'jeu/'+i"> Jouer </button>
             </td>
             <td>
-                <button (click)="deletee(i)">supprimer</button>
+              <button (click)="deletee(i)">supprimer</button>
               </td>
           </tr>
         </table>

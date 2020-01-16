@@ -9,13 +9,15 @@ import { FormlistComponent } from './formlist/formlist.component';
 import { GamesService } from './games.service';
 import { HttpClientModule} from '@angular/common/http';
 import { JeuComponent } from './jeu/jeu.component';
+import { EditeurComponent } from './editeur/editeur.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
     FormlistComponent,
-    JeuComponent
+    JeuComponent,
+    EditeurComponent
   ],
   imports: [
     BrowserModule,

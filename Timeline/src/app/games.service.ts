@@ -5,6 +5,16 @@ import { tap } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 
 
+import { HttpHeaders } from '@angular/common/http';
+
+
+
+
+const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'my-auth-token' }) };
+
+
+
+
 
 @Injectable({
   providedIn: "root"
@@ -33,6 +43,7 @@ export class GamesService {
 
   constructor(private httpClient: HttpClient) {
     this.getTimelinesTestObservable();
+    this.createTimelinesTestObservable();
     this.games = this.getTimelinesTestObservable();
   }
 
@@ -46,11 +57,23 @@ export class GamesService {
       .pipe(tap(dataList => (this.gamess = dataList)));
   }
 
+
   deleteTimelinesTestObservable(i) {
-    alert("et par ici "+i);
-    return this.httpClient.delete("http://localhost:8080/api/timeline/1")
-   /* return this.httpClient
-    .delete<Timeline[]>("http://localhost:8080/api/timeline/1")*/
+    alert("et par ici " + i);
+    return this.httpClient.delete("http://localhost:8080/api/timeline/1", httpOptions);
+    /* return this.httpClient
+     .delete<Timeline[]>("http://localhost:8080/api/timeline/1")*/
   }
+
+
+
+  createTimelinesTestObservable() {
+    alert("et par ici+icreate");
+
+    return this.httpClient
+      .post<Timeline>("http://localhost:8080/api/timeline", timeline, httpOptions);
+
+  }
+
 
 }
