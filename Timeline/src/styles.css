@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+button {
+  background-color: rgb(179, 16, 143);
+  border-radius: 5px;
+  color: whitesmoke;
+  text-align: center;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+a{
+  color: whitesmoke;
+  text-decoration: none;
+}
+
+h1{
+  color: rgb(100, 8, 80);
+  text-align: center;
+}
+
+form,div {
+  text-align: center;
+}
+
+table {
+  width:70%;
+  margin-left:15%;
+  margin-right:15%;
+}
+
+.button {
+  margin-left:auto;
+  margin-right:auto;
+  background-color: rgb(179, 16, 143);
+  border-radius: 5px;
+  color: whitesmoke;
+  text-align: center;
+}
+
+img{
+  width: 20%;
+  margin-left:40%;
+  margin-right:40%;
+  background-color: grey;
+}
