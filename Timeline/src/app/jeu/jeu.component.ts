@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ModuleWithComponentFactories } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { GamesService } from '../games.service';
 import { Timeline } from '../interfaceTimeline';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Card } from '../interfaceCard';
 
 @Component({
   selector: 'app-jeu',
@@ -23,6 +24,9 @@ export class JeuComponent implements OnInit {
   timeline: Timeline;
   jeuForm;
   cheminURL;
+  indexCarteEnCours;
+  cartesTrouvees: Card[] = [];
+  cartesADeviner: Card[] = [];
 
   private games: Observable<Timeline[]>;
 
@@ -63,17 +67,8 @@ export class JeuComponent implements OnInit {
 
           alert("16")
         });
-
-      this.rnd = Math.floor(Math.random() * 10);
-      this.cheminURL = this.timeline.cardList[this.rnd].imageUrl;
-      alert("15")
-      console.log("Ca marche id: " + this.timeline.cardList[this.rnd].identifierModuleUrl);
-      console.log("Ca marche name: " + this.timeline.cardList[this.rnd].name);
-      console.log("Ca marche description: " + this.timeline.cardList[this.rnd].description);
-      console.log("Ca marche URL: " + this.timeline.cardList[this.rnd].imageUrl);
-
-      console.log("Ca marche pas date: " + this.timeline.cardList[this.rnd].date);
-
+      this.cartesADeviner = this.timeline.cardList;
+      this.nouvelleCarte();
     });
 
 
@@ -91,17 +86,10 @@ export class JeuComponent implements OnInit {
  this.rnd = Math.floor(Math.random() * 10);
     this.cheminURL = this.timeline.cardList[this.rnd].imageUrl;
 */
-
- //  if (timeline.cardList[0].date == card.reponse)
-/*
-   console.log("Ca marche id: " + this.timeline.cardList[this.rnd].identifierModuleUrl);
-   console.log("Ca marche name: " + this.timeline.cardList[this.rnd].name);
-   console.log("Ca marche description: " + this.timeline.cardList[this.rnd].description);
-   console.log("Ca marche URL: " + this.timeline.cardList[this.rnd].imageUrl);
-*/
    console.log("Ca marche pas date: " + this.timeline.cardList[this.rnd].date);
-   if (card.reponse == this.timeline.cardList[1].date) alert("GAGNE!");
-   else alert("ESSAYES ENCORE");
+   if (card.reponse == this.timeline.cardList[this.rnd].date) {
+     this.winner(this.indexCarteEnCours);
+   } else { alert('ESSAYES ENCORE'); }
  }
 
  getJeuById(id: number) {
@@ -111,6 +99,38 @@ export class JeuComponent implements OnInit {
      }
    );
    return jeu;
+ }
+
+ winner(index){
+   this.cartesTrouvees.push(this.timeline.cardList[index]);
+   this.cartesADeviner.splice(index,1);
+   console.log("Cartes à devinerthis.cartesADeviner");
+   this.finDeJeu();
+   console.log("Taile du tableau: "+this.cartesADeviner.length);
+ }
+
+ nouvelleCarte(){
+  this.rnd = this.getRandomInt(this.cartesADeviner.length);
+  this.indexCarteEnCours=this.rnd;
+  this.cheminURL = this.cartesADeviner[this.indexCarteEnCours].imageUrl;
+  console.log("Ca marche id: " + this.timeline.cardList[this.rnd].identifierModuleUrl);
+  console.log("Ca marche name: " + this.timeline.cardList[this.rnd].name);
+  console.log("Ca marche description: " + this.timeline.cardList[this.rnd].description);
+  console.log("Ca marche URL: " + this.timeline.cardList[this.rnd].imageUrl);
+  console.log("Ca marche pas date: " + this.timeline.cardList[this.rnd].date);
+  console.log("Taile du tableau: "+this.cartesADeviner.length);
+ }
+
+ getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+ finDeJeu(){
+  if (this.cartesADeviner.length==1) {
+    alert("Il n'y a plus de carte"); //TODO cacher le bouton deviner
+  } else {
+    this.nouvelleCarte();
+  }
  }
 
 }

@@ -3,7 +3,8 @@
 
 
  <div>
-  <body onload="loadImg()">
+   <body>
+<!--  <body onload="loadImg()"> -->
 
   <form [formGroup]="jeuForm" (ngSubmit)="onReponse(jeuForm.value)">
 
@@ -30,6 +31,17 @@
 <h1>
   Carte(s) trouvée(s)
 </h1>
+<table>
+  <tr *ngFor="let card of this.cartesTrouvees">
+    <td>
+      <img [src]="card.imageUrl" width="240" height="300" alt="l'image">
+    </td>
+    <td>{{card.name}}</td>
+    <td>{{card.description}}</td>
+    <td>{{card.date}}</td>
+  </tr>
+</table>
+
 
 
 
