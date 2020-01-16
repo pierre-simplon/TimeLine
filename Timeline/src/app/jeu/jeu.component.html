@@ -1,18 +1,22 @@
 
  <!--<button type(clic)= "afficheimg()">afficheimf </button>-->
 
-<div>
+
+ <div>
+  <body onload="loadImg()">
 
   <form [formGroup]="jeuForm" (ngSubmit)="onReponse(jeuForm.value)">
-    <body>
+
       <div>
         <input placeholder="Entrez la date" type="string" formControlName="reponse">
 
         <button type="submit"> Deviner </button>
       </div>
+       </form>
     </body>
-  </form>
-</div>
+  </div>
+
+
 <h1>
   Carte à deviner
 </h1>

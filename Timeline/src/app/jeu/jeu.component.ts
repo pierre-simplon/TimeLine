@@ -18,8 +18,8 @@ export class JeuComponent implements OnInit {
   // jeuForm;
   // @Input() id;
 
-  rnd: number = Math.floor(Math.random()*10);
-  id:  number;
+  rnd: number = Math.floor(Math.random() * 10);
+  id: number;
   timeline: Timeline;
   jeuForm;
   cheminURL;
@@ -39,13 +39,13 @@ export class JeuComponent implements OnInit {
     // this.games = this.gameservice.getTimelinesTestObservable();
     // console.log(this.gamess);
     // this.cheminImage = this.gamess[0].cardList[0].imageUrl;
-   }
+  }
 
 
 
   ngOnInit() {
     let id = (this.routes.snapshot.params['id']);
-    id=+id+1;
+    id = +id + 1;
 
     // alert(id);
     // this.name =this.getJeuById(+id).name;
@@ -56,38 +56,61 @@ export class JeuComponent implements OnInit {
     this.gameservice.games.subscribe(timelineList => {
       this.timeline = timelineList.find(
         (s) => {
-          return s.id === id
-          .pipe(
-            tap(cheminURL => this.cheminURL = this.timeline.cardList[this.rnd].imageUrl));
-      //     .pipe(tap(this.cheminURL=this.timeline.cardList[this.rnd].imageUrl);
+          return s.id === id;
+          //     .pipe(
+          //      tap(cheminURL => this.cheminURL = this.timeline.cardList[this.rnd].imageUrl));
+          //     .pipe(tap(this.cheminURL=this.timeline.cardList[this.rnd].imageUrl);
+
+          alert("16")
         });
-      });
 
-  }
+      this.rnd = Math.floor(Math.random() * 10);
+      this.cheminURL = this.timeline.cardList[this.rnd].imageUrl;
+      alert("15")
+      console.log("Ca marche id: " + this.timeline.cardList[this.rnd].identifierModuleUrl);
+      console.log("Ca marche name: " + this.timeline.cardList[this.rnd].name);
+      console.log("Ca marche description: " + this.timeline.cardList[this.rnd].description);
+      console.log("Ca marche URL: " + this.timeline.cardList[this.rnd].imageUrl);
+
+      console.log("Ca marche pas date: " + this.timeline.cardList[this.rnd].date);
+
+    });
+
+
+    /*
+    alert("ici");
+    this.rnd = Math.floor(Math.random() * 10);
+    this.cheminURL = this.timeline.cardList[this.rnd].imageUrl;
+
+  */ }
 
 
 
-  onReponse(card){
-  //  if (timeline.cardList[0].date == card.reponse)
-  this.cheminURL=this.timeline.cardList[this.rnd].imageUrl;
+  onReponse(card) {
+   /*
+ this.rnd = Math.floor(Math.random() * 10);
+    this.cheminURL = this.timeline.cardList[this.rnd].imageUrl;
+*/
 
-  console.log("Ca marche id: "+ this.timeline.cardList[1].identifierModuleUrl);
-  console.log("Ca marche name: "+ this.timeline.cardList[1].name);
-  console.log("Ca marche description: "+ this.timeline.cardList[1].description);
-  console.log("Ca marche URL: "+ this.timeline.cardList[1].imageUrl);
+ //  if (timeline.cardList[0].date == card.reponse)
+/*
+   console.log("Ca marche id: " + this.timeline.cardList[this.rnd].identifierModuleUrl);
+   console.log("Ca marche name: " + this.timeline.cardList[this.rnd].name);
+   console.log("Ca marche description: " + this.timeline.cardList[this.rnd].description);
+   console.log("Ca marche URL: " + this.timeline.cardList[this.rnd].imageUrl);
+*/
+   console.log("Ca marche pas date: " + this.timeline.cardList[this.rnd].date);
+   if (card.reponse == this.timeline.cardList[1].date) alert("GAGNE!");
+   else alert("ESSAYES ENCORE");
+ }
 
-  console.log("Ca marche pas date: "+ this.timeline.cardList[1].date);
-  if (card.reponse == this.timeline.cardList[1].date) alert("GAGNE!");
-  else alert("ESSAYES ENCORE");
-  }
-
-  getJeuById(id: number) {
-    const jeu = this.gameservice.gamess.find(
-      (s) => {
-        return s.id === id;
-      }
-    );
-    return jeu;
-}
+ getJeuById(id: number) {
+   const jeu = this.gameservice.gamess.find(
+     (s) => {
+       return s.id === id;
+     }
+   );
+   return jeu;
+ }
 
 }
