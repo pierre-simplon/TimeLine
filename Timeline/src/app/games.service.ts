@@ -10,7 +10,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 
 
-const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'my-auth-token' }) };
+const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', Authorization: 'my-auth-token' }) };
 
 
 
@@ -43,7 +43,6 @@ export class GamesService {
 
   constructor(private httpClient: HttpClient) {
     this.getTimelinesTestObservable();
-    this.createTimelinesTestObservable();
     this.games = this.getTimelinesTestObservable();
   }
 
@@ -67,7 +66,7 @@ export class GamesService {
 
 
 
-  createTimelinesTestObservable() {
+  createTimelinesTestObservable(timeline: Timeline) {
     alert("et par ici+icreate");
 
     return this.httpClient

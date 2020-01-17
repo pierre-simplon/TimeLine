@@ -57,6 +57,10 @@ this.Timeline.
     this.temporaryTimeline.id=0;
     this.temporaryTimeline.cardList=[];
     this.temporaryTimeline.name=this.editeurForm.name;
+    this.temporaryTimeline.creationDate="2019-12-11";
+    this.temporaryTimeline.updateDate="2019-12-11";
+    this.temporaryTimeline.cardList=[];
+    this.temporaryTimeline.category=this.editeurForm.category;
     this.gameservice.createTimelinesTestObservable(this.temporaryTimeline);
     console.log(this.editeurForm);
 
