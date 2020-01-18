@@ -13,7 +13,6 @@ export class EditeurComponent implements OnInit {
   editeurForm;
   temporaryTimeline: Timeline;
 
-
   constructor(
     private formBuilder: FormBuilder,
     private routes: ActivatedRoute,
@@ -27,47 +26,24 @@ export class EditeurComponent implements OnInit {
       updateDate: ""
     })
   }
-/*
 
-let Newjeu:Timeline;
-
-Newjeu.name=this.editeurForm.reponseJeu;
-Newjeu.category=this.editeurForm.reponseCategorie;
-Newjeu.creationDate="2020-01-16";
-Newjeu.updateDate="2020-01-16";
-
-
-this.Timeline.
-
-*/
   ngOnInit() {
   }
 
   onEditTimeLine() {
-
-    alert("edit");
+    alert("edit TODO");
   }
-
-
 
   ajouter() {
-
-
-    alert("edit222222");
-    this.temporaryTimeline.id=0;
-    this.temporaryTimeline.cardList=[];
-    this.temporaryTimeline.name=this.editeurForm.name;
-    this.temporaryTimeline.creationDate="2019-12-11";
-    this.temporaryTimeline.updateDate="2019-12-11";
-    this.temporaryTimeline.cardList=[];
-    this.temporaryTimeline.category=this.editeurForm.category;
+    this.temporaryTimeline.id = 0;
+    this.temporaryTimeline.cardList = [];
+    this.temporaryTimeline.name = this.editeurForm.name;
+    this.temporaryTimeline.creationDate = new Date(2019, 12, 11);
+    this.temporaryTimeline.updateDate = new Date(2019, 12, 11);
+    this.temporaryTimeline.cardList = [];
+    this.temporaryTimeline.category = this.editeurForm.category;
     this.gameservice.createTimelinesTestObservable(this.temporaryTimeline);
     console.log(this.editeurForm);
-
   }
-
-
-
-
 
 }

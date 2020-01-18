@@ -1,33 +1,39 @@
 <p>editeur works!</p>
 
 <form [formGroup]="editeurForm" (ngSubmit)="onEditTimeLine(editeurForm.value)">
-
-
-
   <table>
     <tr>
-
       <th>
-        <input placeholder="Entrez le Nom du jeu" type="string" formControlName="name">
-
+        <input
+          placeholder="Entrez le Nom du jeu"
+          type="string"
+          formControlName="name"
+        />
       </th>
       <th>
-        <input placeholder="Entrez la Categorie" type="string" formControlName="category">
-
+        <input
+          placeholder="Entrez la Categorie"
+          type="string"
+          formControlName="category"
+        />
       </th>
       <th>
-        <input placeholder="2020-01-16" type="string" formControlName="creationDate">
-
+        <input
+          placeholder="2020-01-16"
+          type="string"
+          formControlName="creationDate"
+        />
       </th>
       <th>
-        <input placeholder="2020-01-16" type="string" formControlName="updateDate">
-
+        <input
+          placeholder="2020-01-16"
+          type="string"
+          formControlName="updateDate"
+        />
       </th>
       <th>
         <button (click)="ajouter()">ajouter</button>
-
       </th>
-
     </tr>
   </table>
 </form>

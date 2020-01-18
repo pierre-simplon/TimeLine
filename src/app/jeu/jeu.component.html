@@ -1,22 +1,13 @@
-
- <!--<button type(clic)= "afficheimg()">afficheimf </button>-->
-
-
- <div>
-   <body>
-<!--  <body onload="loadImg()"> -->
-
-  <form [formGroup]="jeuForm" (ngSubmit)="onReponse(jeuForm.value)">
-
+<div>
+  <body>
+    <form [formGroup]="jeuForm" (ngSubmit)="onReponse(jeuForm.value)">
       <div>
-        <input placeholder="Entrez la date" type="string" formControlName="reponse">
-
-        <button type="submit"> Deviner </button>
+        <input placeholder="Entrez la date" type="date" formControlName="reponse"/>
+        <button type="submit">Deviner</button>
       </div>
-       </form>
-    </body>
-  </div>
-
+    </form>
+  </body>
+</div>
 
 <h1>
   Carte à deviner
@@ -24,24 +15,21 @@
 <table>
   <tr>
     <td>
-      <img [src]="cheminURL" width="240" height="300" alt="l'image">
+      <img [src]="cheminURL" width="240" height="300" alt="l'image" />
     </td>
   </tr>
 </table>
+
 <h1>
   Carte(s) trouvée(s)
 </h1>
 <table>
   <tr *ngFor="let card of this.cartesTrouvees">
     <td>
-      <img [src]="card.imageUrl" width="240" height="300" alt="l'image">
+      <img [src]="card.imageUrl" width="240" height="300" alt="l'image" />
     </td>
-    <td>{{card.name}}</td>
-    <td>{{card.description}}</td>
-    <td>{{card.date}}</td>
+    <td>{{ card.name }}</td>
+    <td>{{ card.description }}</td>
+    <td>{{ card.date }}</td>
   </tr>
 </table>
-
-
-
-

@@ -13,13 +13,9 @@ import { Card } from '../interfaceCard';
   styleUrls: ['./jeu.component.css']
 })
 export class JeuComponent implements OnInit {
-  // gamess: Timeline[];
-  // name: string = 'jeu';
-  // cheminImage;
-  // jeuForm;
-  // @Input() id;
 
-  rnd: number = Math.floor(Math.random() * 10);
+
+  rnd: number;
   id: number;
   timeline: Timeline;
   jeuForm;
@@ -39,10 +35,6 @@ export class JeuComponent implements OnInit {
       reponse: "",
     });
 
-    // this.gamess = this.gameservice.gamess;
-    // this.games = this.gameservice.getTimelinesTestObservable();
-    // console.log(this.gamess);
-    // this.cheminImage = this.gamess[0].cardList[0].imageUrl;
   }
 
 
@@ -51,43 +43,21 @@ export class JeuComponent implements OnInit {
     let id = (this.routes.snapshot.params['id']);
     id = +id + 1;
 
-    // alert(id);
-    // this.name =this.getJeuById(+id).name;
-    // this.id=this.getJeuById(+id).id;
-    // alert("name "+this.name);
-    // alert("id "+this.id);
 
     this.gameservice.games.subscribe(timelineList => {
       this.timeline = timelineList.find(
         (s) => {
           return s.id === id;
-          //     .pipe(
-          //      tap(cheminURL => this.cheminURL = this.timeline.cardList[this.rnd].imageUrl));
-          //     .pipe(tap(this.cheminURL=this.timeline.cardList[this.rnd].imageUrl);
-
-          alert("16")
         });
       this.cartesADeviner = this.timeline.cardList;
       this.nouvelleCarte();
     });
-
-
-    /*
-    alert("ici");
-    this.rnd = Math.floor(Math.random() * 10);
-    this.cheminURL = this.timeline.cardList[this.rnd].imageUrl;
-
-  */ }
+  }
 
 
 
   onReponse(card) {
-   /*
- this.rnd = Math.floor(Math.random() * 10);
-    this.cheminURL = this.timeline.cardList[this.rnd].imageUrl;
-*/
-   console.log("Ca marche pas date: " + this.timeline.cardList[this.rnd].date);
-   if (card.reponse == this.timeline.cardList[this.rnd].date) {
+   if (card.reponse === this.cartesADeviner[this.rnd].date) {
      this.winner(this.indexCarteEnCours);
    } else { alert('ESSAYES ENCORE'); }
  }
@@ -104,9 +74,7 @@ export class JeuComponent implements OnInit {
  winner(index){
    this.cartesTrouvees.push(this.timeline.cardList[index]);
    this.cartesADeviner.splice(index,1);
-   console.log("Cartes à devinerthis.cartesADeviner");
    this.finDeJeu();
-   console.log("Taile du tableau: "+this.cartesADeviner.length);
  }
 
  nouvelleCarte(){
@@ -122,7 +90,7 @@ export class JeuComponent implements OnInit {
  }
 
  getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
+  return Math.floor(Math.random() * max);
 }
 
  finDeJeu(){

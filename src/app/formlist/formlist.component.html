@@ -1,21 +1,14 @@
 <div>
- <!--
-  <button class="button"> Ajouter un TimeLine
- -->
-  <button class="button" routerLink='editeur'> Ajouter un TimeLine </button>
-
-
-
+  <button class="button" routerLink="editeur">Ajouter un TimeLine</button>
 </div>
 
 <div>
   <form [formGroup]="gameForm" (ngSubmit)="onNewTimeLine()">
-
     <body>
       <div>
         <table>
           <tr>
-            <th> id </th>
+            <th>id</th>
             <th>
               Nom
             </th>
@@ -41,27 +34,23 @@
               Supprimer ?
             </th>
           </tr>
-          <tr>
-          <tr *ngFor=" let game of games | async; let i = index">
-            <td>{{game.id}}</td>
-            <td>{{game.name}}</td>
-            <td>{{game.creationDate}}</td>
-            <td>{{game.updateDate}}</td>
-            <td>{{game.category}}</td>
-            <td>{{game.cardList.length}}</td>
+          <tr></tr>
+          <tr *ngFor="let game of games | async; let i = index">
+            <td>{{ game.id }}</td>
+            <td>{{ game.name }}</td>
+            <td>{{ game.creationDate }}</td>
+            <td>{{ game.updateDate }}</td>
+            <td>{{ game.category }}</td>
+            <td>{{ game.cardList.length }}</td>
             <td>
-
-              <button class="button" type> Editer </button>
-
-
-
+              <button class="button" type>Editer</button>
             </td>
             <td>
-              <button class="button" [routerLink]="'jeu/'+i"> Jouer </button>
+              <button class="button" [routerLink]="'jeu/' + i">Jouer</button>
             </td>
             <td>
               <button (click)="deletee(i)">supprimer</button>
-              </td>
+            </td>
           </tr>
         </table>
       </div>

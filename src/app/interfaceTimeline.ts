@@ -3,8 +3,8 @@ import { Card } from './interfaceCard';
 export interface Timeline {
   id: number;
   name: string;
-  creationDate: string;
-  updateDate: string;
+  creationDate: Date;
+  updateDate: Date;
   category: string;
   cardList: Card[];
 }

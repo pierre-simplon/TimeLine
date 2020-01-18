@@ -21,25 +21,7 @@ const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/js
 })
 export class GamesService {
   gamess: Timeline[] = [];
-  games: Observable<
-    Timeline[]
-  >; /* =
- [{
-      "id": 1,
-      "name ": "Numérique",
-      "creationDate": "2019-12-12",
-      "updateDate": "2019-12-12",
-      "category": "CNF"
-    },
-    {
-      "id": 2,
-      "name": "Data",
-      "creationDate": "2019-12-12",
-      "updateDate": "2019-12-12",
-      "category": "Data"
-    }
-  ];
-*/
+  games: Observable<Timeline[]>;
 
   constructor(private httpClient: HttpClient) {
     this.getTimelinesTestObservable();
@@ -56,19 +38,11 @@ export class GamesService {
       .pipe(tap(dataList => (this.gamess = dataList)));
   }
 
-
   deleteTimelinesTestObservable(i) {
-    alert("et par ici " + i);
     return this.httpClient.delete("http://localhost:8080/api/timeline/1", httpOptions);
-    /* return this.httpClient
-     .delete<Timeline[]>("http://localhost:8080/api/timeline/1")*/
   }
 
-
-
   createTimelinesTestObservable(timeline: Timeline) {
-    alert("et par ici+icreate");
-
     return this.httpClient
       .post<Timeline>("http://localhost:8080/api/timeline", timeline, httpOptions);
 
