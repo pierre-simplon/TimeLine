@@ -1,5 +1,3 @@
-<p>editeur works!</p>
-
 <form [formGroup]="editeurForm" (ngSubmit)="onEditTimeLine(editeurForm.value)">
   <table>
     <tr>
@@ -19,20 +17,18 @@
       </th>
       <th>
         <input
-          placeholder="2020-01-16"
-          type="string"
+          type="date"
           formControlName="creationDate"
         />
       </th>
       <th>
         <input
-          placeholder="2020-01-16"
-          type="string"
+          type="date"
           formControlName="updateDate"
         />
       </th>
       <th>
-        <button (click)="ajouter()">ajouter</button>
+        <button type="submit">ajouter</button>
       </th>
     </tr>
   </table>

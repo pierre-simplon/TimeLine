@@ -11,23 +11,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./formlist.component.css']
 })
 export class FormlistComponent implements OnInit {
-  private games: Observable<Timeline[]>;
-  gameList = this.gameService.games;
+  gameList = this.gameService.gamesObservable;
   gameForm;
-  gamess;
+  games: Observable<Timeline[]>;
 
   constructor(
-    private formBuilder: FormBuilder,
     private gameService: GamesService
   ) {
     this.games = this.gameService.getTimelinesTestObservable();
-    this.gameForm = this.formBuilder.group({
-      id: 0,
-      name: 'toto',
-      creationDate: "2020-01-12",
-      updateDate: "2020-01-12",
-      category: 'Pierre&Philippe'
-    })
   }
 
   ngOnInit() {

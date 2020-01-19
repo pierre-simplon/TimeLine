@@ -24,27 +24,22 @@ export class JeuComponent implements OnInit {
   cartesTrouvees: Card[] = [];
   cartesADeviner: Card[] = [];
 
-  private games: Observable<Timeline[]>;
-
   constructor(
     private formBuilder: FormBuilder,
     private gameservice: GamesService,
     private routes: ActivatedRoute
   ) {
     this.jeuForm = this.formBuilder.group({
-      reponse: "",
+      reponse: '',
     });
-
   }
-
-
 
   ngOnInit() {
     let id = (this.routes.snapshot.params['id']);
     id = +id + 1;
 
 
-    this.gameservice.games.subscribe(timelineList => {
+    this.gameservice.gamesObservable.subscribe(timelineList => {
       this.timeline = timelineList.find(
         (s) => {
           return s.id === id;
@@ -63,7 +58,7 @@ export class JeuComponent implements OnInit {
  }
 
  getJeuById(id: number) {
-   const jeu = this.gameservice.gamess.find(
+   const jeu = this.gameservice.games.find(
      (s) => {
        return s.id === id;
      }
@@ -81,7 +76,7 @@ export class JeuComponent implements OnInit {
   this.rnd = this.getRandomInt(this.cartesADeviner.length);
   this.indexCarteEnCours=this.rnd;
   this.cheminURL = this.cartesADeviner[this.indexCarteEnCours].imageUrl;
-  console.log("Ca marche id: " + this.timeline.cardList[this.rnd].identifierModuleUrl);
+  console.log("Ca marche id: " + this.timeline.cardList[this.rnd].id);
   console.log("Ca marche name: " + this.timeline.cardList[this.rnd].name);
   console.log("Ca marche description: " + this.timeline.cardList[this.rnd].description);
   console.log("Ca marche URL: " + this.timeline.cardList[this.rnd].imageUrl);
@@ -95,7 +90,7 @@ export class JeuComponent implements OnInit {
 
  finDeJeu(){
   if (this.cartesADeviner.length==1) {
-    alert("Il n'y a plus de carte"); //TODO cacher le bouton deviner
+    alert('Il n\'y a plus de carte'); //TODO cacher le bouton deviner
   } else {
     this.nouvelleCarte();
   }

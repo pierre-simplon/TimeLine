@@ -1,5 +1,5 @@
 export interface Card {
-  identifierModuleUrl: number;
+  id: number;
   name: string;
   date: Date;
   imageUrl: string;
