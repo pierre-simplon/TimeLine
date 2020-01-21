@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class EditeurComponent implements OnInit {
   editeurForm;
+  cardForm;
   timeLineObservable: Observable<Timeline>;
   temportaryCardlist: Card[] = [{id: 1, name: 'cardname', date: new Date(), imageUrl: 'http://google.fr' , description: 'carte google'}];
   temporaryTimeline: Timeline =  {
@@ -23,6 +24,7 @@ export class EditeurComponent implements OnInit {
     category: '',
     cardList: this.temportaryCardlist
   };
+  temporaryCard: Card;
 
   now: Date;
 
@@ -37,6 +39,12 @@ export class EditeurComponent implements OnInit {
       category: '',
       creationDate: now,
       updateDate: now
+    });
+
+    this.cardForm = this.formBuilder.group({
+      name: '',
+      imageUrl: '',
+      description: ''
     });
 
 
@@ -65,9 +73,18 @@ export class EditeurComponent implements OnInit {
     console.log('Lors de la creation la timeline du formulaire suivante est envoyée au service create: ' + this.gameservice.TimelineToString(this.temporaryTimeline));
     // tslint:disable-next-line: max-line-length
     console.log('Creation du timeline suivant retourné par httpClient: ');
-    this.timeLineObservable = this.gameservice.createTimelinesTestObservable(this.temporaryTimeline);
-    this.timeLineObservable.subscribe(timeline => this.temporaryTimeline = timeline);
+    this.gameservice.createTimelinesTestObservable(this.temporaryTimeline).subscribe(timeline => this.temporaryTimeline = timeline);
     this.gameservice.TimelineToString(this.temporaryTimeline);
+  }
+
+  onNewCard(value){
+    this.temporaryCard.id = 1;
+    this.temporaryCard.name = value.name;
+    this.temporaryCard.date = new Date();
+    this.temporaryCard.imageUrl = value.imageUrl;
+    this.temporaryCard.description = value.description;
+    this.temportaryCardlist.unshift(this.temporaryCard);
+    console.log("Carte ajoutée au tableau");
   }
 
 }

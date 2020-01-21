@@ -33,3 +33,61 @@
     </tr>
   </table>
 </form>
+<h2>
+  Ajouter de nouvelles cartes a ce jeu
+</h2>
+<table [formGroup]="cardForm" (ngSubmit)="onNewCard(cardForm.value)">
+  <tr>
+    <td>
+      <input placeholder="Entrez le nom de la carte" type=string formControlName="name" />
+    </td>
+    <td>
+      <input placeholder="Entrez l'URL de son image" type=string formControlName="imageUrl" />
+    </td>
+    <td>
+      <input placeholder="Entrez sa description: " type=string formControlName="description" />
+    </td>
+    <td>
+      <button type="submit"> ajouter carte </button>
+    </td>
+  </tr>
+</table>
+<h2>
+  Liste des cartes ajoutées
+</h2>
+<table>
+  <tr>
+    <th>
+      id
+    </th>
+    <th>
+      Name
+    </th>
+    <th>
+      Date
+    </th>
+    <th>
+      URL
+    </th>
+    <th>
+      Description
+    </th>
+  </tr>
+  <tr *ngFor="let card of this.temportaryCardlist">
+    <th>
+      {{card.id}}
+    </th>
+    <th>
+      {{card.name}}
+    </th>
+    <th>
+      {{card.date | date:'shortDate'}}
+    </th>
+    <th>
+      {{card.imageUrl}}
+    </th>
+    <th>
+      {{card.description}}
+    </th>
+  </tr>
+</table>

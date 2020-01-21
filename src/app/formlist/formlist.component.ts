@@ -38,9 +38,7 @@ export class FormlistComponent implements OnInit {
 
 
   deletee() {
-    this.timeLineObservable = this.gameService.deleteTimelinesTestObservable(2);
-    this.timeLineObservable.subscribe(timeline => this.deletedTimeline = timeline);
-    this.gameService.TimelineToString(this.deletedTimeline);
+    this.gameService.deleteTimelinesTestObservable(2).subscribe(() => {this.games = this.gameService.getTimelinesTestObservable(); });
   }
 
 
