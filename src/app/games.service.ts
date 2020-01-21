@@ -19,26 +19,26 @@ export class GamesService {
   deletedTimeline: Timeline;
 
   constructor(private httpClient: HttpClient) {
-    this.gamesObservable = this.getTimelinesTestObservable();
+    this.gamesObservable = this.getTimelinesObservable();
   }
 
   /**
    * Get Timelines
    * @return : Liste des timelines
    */
-  getTimelinesTestObservable(): Observable<Timeline[]> {
+  getTimelinesObservable(): Observable<Timeline[]> {
     return this.httpClient
       .get<Timeline[]>("http://localhost:8080/api/timeline")
       .pipe(tap(dataList => (this.games = dataList)));
   }
 
-  deleteTimelinesTestObservable(i: number): Observable<Timeline> {
+  deleteTimelinesObservable(i: number): Observable<Timeline> {
     return this.httpClient
-    .delete<Timeline>("http://localhost:8080/api/timeline/2")
+    .delete<Timeline>('http://localhost:8080/api/timeline/' + i)
     .pipe(tap(returnedTimeline => (this.deletedTimeline = returnedTimeline)));
   }
 
-  createTimelinesTestObservable(timeline: Timeline): Observable<Timeline> {
+  createTimelinesObservable(timeline: Timeline): Observable<Timeline> {
     return this.httpClient
     .post<Timeline>('http://localhost:8080/api/timeline', timeline)
     .pipe(tap(returnedTimeline => (this.editedTimeline = returnedTimeline)));

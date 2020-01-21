@@ -73,7 +73,7 @@ export class EditeurComponent implements OnInit {
     console.log('Lors de la creation la timeline du formulaire suivante est envoyée au service create: ' + this.gameservice.TimelineToString(this.temporaryTimeline));
     // tslint:disable-next-line: max-line-length
     console.log('Creation du timeline suivant retourné par httpClient: ');
-    this.gameservice.createTimelinesTestObservable(this.temporaryTimeline).subscribe(timeline => this.temporaryTimeline = timeline);
+    this.gameservice.createTimelinesObservable(this.temporaryTimeline).subscribe(timeline => this.temporaryTimeline = timeline);
     this.gameservice.TimelineToString(this.temporaryTimeline);
   }
 

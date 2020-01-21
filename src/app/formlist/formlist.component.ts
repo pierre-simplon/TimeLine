@@ -26,7 +26,7 @@ export class FormlistComponent implements OnInit {
   constructor(
     private gameService: GamesService
   ) {
-    this.games = this.gameService.getTimelinesTestObservable();
+    this.games = this.gameService.getTimelinesObservable();
   }
 
   ngOnInit() {
@@ -37,8 +37,8 @@ export class FormlistComponent implements OnInit {
   }
 
 
-  deletee() {
-    this.gameService.deleteTimelinesTestObservable(2).subscribe(() => {this.games = this.gameService.getTimelinesTestObservable(); });
+  delete(i) {
+    this.gameService.deleteTimelinesObservable(i).subscribe(() => {this.games = this.gameService.getTimelinesObservable(); });
   }
 
 
