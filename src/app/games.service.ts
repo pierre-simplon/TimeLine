@@ -65,6 +65,6 @@ export class GamesService {
       console.log('Carte URL: ' + card.imageUrl);
       console.log('Carte description: ' + card.description);
     }
-    } else console.log('Le tableau des cartes est vide');
+    } else { console.log('Le tableau des cartes est vide'); }
   }
 }

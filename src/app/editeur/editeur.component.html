@@ -1,4 +1,4 @@
-<form [formGroup]="editeurForm" (ngSubmit)="onEditTimeLine(editeurForm.value)">
+<form [formGroup]="timeLineForm" (ngSubmit)="onEditTimeLine(timeLineForm.value)">
   <table>
     <tr>
       <th>
@@ -37,7 +37,8 @@
     Ajouter de nouvelles cartes à ce jeu
   </h2>
 
-   <table formArrayName="addDynamicCard" *ngFor="let card of editeurForm.get('addDynamicCard')['controls'] ; let i = index;">
+   <table formArrayName="cards" *ngFor="let card of timeLine
+  Form.get('')['controls'] ; let i = index;">
      <tr [formGroupName]="i">
        <td>
          <input placeholder="Entrez le nom de la carte" type=string formControlName="name" />

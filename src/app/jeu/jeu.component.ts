@@ -52,7 +52,9 @@ export class JeuComponent implements OnInit {
 
 
   onReponse(card) {
-   if (card.reponse === this.cartesADeviner[this.rnd].dateToFind) {
+   if (card.reponse === this.cartesADeviner[this.indexCarteEnCours].dateToFind) {
+     console.log('la date saisie est: ' + card.reponse );
+     console.log('la date a deviner est: ' + this.cartesADeviner[this.indexCarteEnCours].dateToFind );
      this.winner(this.indexCarteEnCours);
    } else { alert('ESSAYES ENCORE'); }
  }
@@ -68,7 +70,7 @@ export class JeuComponent implements OnInit {
 
  winner(index){
    this.cartesTrouvees.push(this.timeline.cardList[index]);
-   this.cartesADeviner.splice(index,1);
+   this.cartesADeviner.splice(index, 1);
    this.finDeJeu();
  }
 
@@ -76,11 +78,11 @@ export class JeuComponent implements OnInit {
   this.rnd = this.getRandomInt(this.cartesADeviner.length);
   this.indexCarteEnCours=this.rnd;
   this.cheminURL = this.cartesADeviner[this.indexCarteEnCours].imageUrl;
-  console.log("Ca marche id: " + this.timeline.cardList[this.rnd].id);
-  console.log("Ca marche name: " + this.timeline.cardList[this.rnd].name);
-  console.log("Ca marche description: " + this.timeline.cardList[this.rnd].description);
-  console.log("Ca marche URL: " + this.timeline.cardList[this.rnd].imageUrl);
-  console.log("Ca marche pas date: " + this.timeline.cardList[this.rnd].dateToFind);
+  console.log("Ca marche id: " + this.timeline.cardList[this.indexCarteEnCours].id);
+  console.log("Ca marche name: " + this.timeline.cardList[this.indexCarteEnCours].name);
+  console.log("Ca marche description: " + this.timeline.cardList[this.indexCarteEnCours].description);
+  console.log("Ca marche URL: " + this.timeline.cardList[this.indexCarteEnCours].imageUrl);
+  console.log("Année de la date de la carte: " + this.timeline.cardList[this.indexCarteEnCours].dateToFind);
   console.log("Taile du tableau: "+this.cartesADeviner.length);
  }
 
