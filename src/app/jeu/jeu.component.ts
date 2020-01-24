@@ -52,7 +52,7 @@ export class JeuComponent implements OnInit {
 
 
   onReponse(card) {
-   if (card.reponse === this.cartesADeviner[this.rnd].date) {
+   if (card.reponse === this.cartesADeviner[this.rnd].dateToFind) {
      this.winner(this.indexCarteEnCours);
    } else { alert('ESSAYES ENCORE'); }
  }
@@ -80,7 +80,7 @@ export class JeuComponent implements OnInit {
   console.log("Ca marche name: " + this.timeline.cardList[this.rnd].name);
   console.log("Ca marche description: " + this.timeline.cardList[this.rnd].description);
   console.log("Ca marche URL: " + this.timeline.cardList[this.rnd].imageUrl);
-  console.log("Ca marche pas date: " + this.timeline.cardList[this.rnd].date);
+  console.log("Ca marche pas date: " + this.timeline.cardList[this.rnd].dateToFind);
   console.log("Taile du tableau: "+this.cartesADeviner.length);
  }
 

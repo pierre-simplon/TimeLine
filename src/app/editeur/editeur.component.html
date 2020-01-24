@@ -32,26 +32,35 @@
       </th>
     </tr>
   </table>
+
+  <h2>
+    Ajouter de nouvelles cartes à ce jeu
+  </h2>
+
+   <table formArrayName="addDynamicCard" *ngFor="let card of editeurForm.get('addDynamicCard')['controls'] ; let i = index;">
+     <tr [formGroupName]="i">
+       <td>
+         <input placeholder="Entrez le nom de la carte" type=string formControlName="name" />
+       </td>
+       <td>
+         <input placeholder="Entrez l'URL de son image" type=string formControlName="imageUrl" />
+       </td>
+       <td>
+         <input placeholder="Entrez sa description: " type=string formControlName="description" />
+       </td>
+       <td>
+        <input placeholder="Entrez la date à trouver: " type=date formControlName="dateToFind" />
+      </td>
+       <td>
+         <button type="button" (click)="addCard()"> ajouter carte </button>
+       </td>
+       <td>
+        <button type="button" (click)="removeCard()"> supprimer carte </button>
+      </td>
+     </tr>
+   </table>
+   <button type="button" (click)="onNewCards()"> Affecter les cartes au timeline </button>
 </form>
-<h2>
-  Ajouter de nouvelles cartes a ce jeu
-</h2>
-<table [formGroup]="cardForm" (ngSubmit)="onNewCard(cardForm.value)">
-  <tr>
-    <td>
-      <input placeholder="Entrez le nom de la carte" type=string formControlName="name" />
-    </td>
-    <td>
-      <input placeholder="Entrez l'URL de son image" type=string formControlName="imageUrl" />
-    </td>
-    <td>
-      <input placeholder="Entrez sa description: " type=string formControlName="description" />
-    </td>
-    <td>
-      <button type="submit"> ajouter carte </button>
-    </td>
-  </tr>
-</table>
 <h2>
   Liste des cartes ajoutées
 </h2>
@@ -73,7 +82,7 @@
       Description
     </th>
   </tr>
-  <tr *ngFor="let card of this.temportaryCardlist">
+  <tr *ngFor="let card of this.temporaryCardlist">
     <th>
       {{card.id}}
     </th>
@@ -81,7 +90,7 @@
       {{card.name}}
     </th>
     <th>
-      {{card.date | date:'shortDate'}}
+      {{card.dateToFind | date:'shortDate'}}
     </th>
     <th>
       {{card.imageUrl}}

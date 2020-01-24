@@ -61,7 +61,7 @@ export class GamesService {
     for (const card of CardTable){
       console.log('Carte id: ' + card.id);
       console.log('Carte name: ' + card.name);
-      console.log('Carte date: ' + card.date);
+      console.log('Carte date: ' + card.dateToFind);
       console.log('Carte URL: ' + card.imageUrl);
       console.log('Carte description: ' + card.description);
     }
