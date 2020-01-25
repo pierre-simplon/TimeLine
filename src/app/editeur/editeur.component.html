@@ -37,8 +37,7 @@
     Ajouter de nouvelles cartes à ce jeu
   </h2>
 
-   <table formArrayName="cards" *ngFor="let card of timeLine
-  Form.get('')['controls'] ; let i = index;">
+   <table formArrayName="cards" *ngFor="let card of timeLineForm.get('cards')['controls'] ; let i = index;">
      <tr [formGroupName]="i">
        <td>
          <input placeholder="Entrez le nom de la carte" type=string formControlName="name" />
@@ -91,7 +90,7 @@
       {{card.name}}
     </th>
     <th>
-      {{card.dateToFind | date:'shortDate'}}
+      {{ card.dateToFind }}
     </th>
     <th>
       {{card.imageUrl}}

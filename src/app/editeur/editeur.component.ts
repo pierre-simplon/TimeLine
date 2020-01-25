@@ -94,24 +94,14 @@ export class EditeurComponent implements OnInit {
     name: '',
     imageUrl: '',
     description: '',
-    dateToFind: new Date(2019, 11, 11)
+    dateToFind: new Date(2020, 12, 12)
     });
   }
-
-  /*
-  updateCard(): FormGroup {
-    this.formBuilder.patchValue({
-      firstName: 'Nancy',
-      address: {
-        street: '123 Drew Street'
-      }
-    });
-  } */
 
   addCard(): void {
     this.cards = this.timeLineForm.get('cards') as FormArray;
     this.cards.push(this.createCard());
-    console.log('Voici le nouveau contenu du tableau cards: ' + this.displayFormArray(this.cards));
+    console.log('Voici le nouveau contenu du tableau de cards: ' + this.displayFormArray(this.cards));
   }
 
   removeCard(): void {
@@ -119,14 +109,14 @@ export class EditeurComponent implements OnInit {
     this.cards.removeAt(this.cards.length - 1);
   }
 
-  getCards(){
+  getCards() {
     return this.timeLineForm.get('cards') as FormArray;
   }
 
   displayFormArray(arrayOfCard: FormArray) {
     for (let i = 0; i < arrayOfCard.length; i++) {
       console.log('carte N°' + i);
-      console.log('Nom de la carte: ' + arrayOfCard[i].name);
+      console.log('la valeur du nom de la carte: ' + arrayOfCard.at(i).value.name);
     }
   }
 
