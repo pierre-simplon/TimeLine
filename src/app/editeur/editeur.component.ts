@@ -13,28 +13,11 @@ import { Observable } from 'rxjs';
 })
 export class EditeurComponent implements OnInit {
   timeLineForm: FormGroup;
-  timeLineObservable: Observable<Timeline>;
-  temporaryCardlist: Card[] = [{id: 1,
-    name: 'cardname',
-    dateToFind: new Date(2019, 12, 11),
-    imageUrl: 'http://google.fr' ,
-    description: 'carte google'}];
-  temporaryTimeline: Timeline =  {
-    id: 0 ,
-    name: '' ,
-    creationDate : new Date(2019, 12, 11),
-    updateDate: new Date(2019, 12, 11),
-    category: '',
-    cardList: this.temporaryCardlist
-  };
-  temporaryCard: Card = {
-    id: 0,
-    name: '',
-    dateToFind: new Date(2019, 12, 11),
-    imageUrl: '',
-    description: ''
-  };
   cards: FormArray;
+  timeLineObservable: Observable<Timeline>;
+  temporaryCardlist: Card[];
+  temporaryTimeline: Timeline;
+  temporaryCard: Card;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,18 +25,27 @@ export class EditeurComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.temporaryCardlist  = [];
+    this.temporaryTimeline = {
+      id: 0 ,
+      name: '' ,
+      creationDate : new Date(),
+      updateDate: new Date(),
+      category: '',
+      cardList: []
+    };
     this.timeLineForm = this.formBuilder.group({
       name: '',
       category: '',
-      creationDate: new Date(2019, 12, 11),
-      updateDate: new Date(2019, 12, 11),
+      creationDate: new Date(),
+      updateDate: new Date(),
       cards: this.formBuilder.array([this.createCard()])
     });
   }
 
   onEditTimeLine(value: { name: string; category: string; creationDate: Date; updateDate: Date; }) {
     console.log('affectation des variables du formulaire...');
-    this.temporaryTimeline.id = 0;
+    this.temporaryTimeline.id = this.gameservice.games.length;
     console.log('id: ' + this.temporaryTimeline.id);
     this.temporaryTimeline.name = value.name;
     console.log('name: ' + this.temporaryTimeline.name);
@@ -73,19 +65,30 @@ export class EditeurComponent implements OnInit {
     this.gameservice.TimelineToString(this.temporaryTimeline);
   }
 
-  onNewCards() {
+  onNewCards(cards: FormArray) {
     console.log('debut de OnNewCards');
-    console.log('la longueur du tableau de formulaire de carte est : ' + this.cards.length);
-    console.log('le tableau des cartes:' + this.cards);
-    console.log('la carte temporaire avant affectation: ' + JSON.stringify(this.temporaryCard));
-    for (let i = 1; i < this.cards.length; i++) {
-      this.temporaryCard.id = this.cards.length - 1;
-      console.log('l\'id de la carte temporaire apres affectation de la longueur cards: ' +  this.temporaryCard.id);
-      console.log('la carte temporaire i=' + (i - 1) + ' a comme nom d\'affectation:' + this.cards[(i - 1)].name);
-      this.temporaryCard.name = this.cards[i].name;
-      this.temporaryCard.dateToFind = new Date(2020, 12, 12);
-      this.temporaryCard.imageUrl = this.cards[i].imageUrl;
-      this.temporaryCard.description = this.cards[i].description;
+    console.log('le contenu du formArray cards est: ');
+    this.displayFormArray(cards);
+    console.log('la longueur du formArray cards est : ' + this.cards.length);
+    this.temporaryCardlist = [];
+    this.temporaryCard = {
+      'id': 0,
+      'name': '',
+      'dateToFind' : new Date(),
+      'imageUrl': '',
+      'description': ''
+    };
+    console.log('longueur de cards:' + this.cards.length);
+    for (let i = 0; i < this.cards.length; i++) {
+      this.temporaryCard.id = this.temporaryCardlist.length;
+      this.temporaryCard.name = cards.at(i).value.name;
+      this.temporaryCard.dateToFind = cards.at(i).value.dateToFind;
+      this.temporaryCard.imageUrl = cards.at(i).value.imageUrl;
+      this.temporaryCard.description = cards.at(i).value.description;
+      console.log('la carte temporaire avant affectation: ' + JSON.stringify(this.temporaryCard));
+      console.log('temporaryCardlist avant affectation de la carte temporaire' + JSON.stringify(this.temporaryCardlist));
+      this.temporaryCardlist.push(this.temporaryCard);
+      console.log('temporaryCardlist apres affectation de la carte temporaire' + JSON.stringify(this.temporaryCardlist));
     }
   }
 
@@ -99,9 +102,37 @@ export class EditeurComponent implements OnInit {
   }
 
   addCard(): void {
+    console.log('le FormArray envoyé par addCard est:');
     this.cards = this.timeLineForm.get('cards') as FormArray;
+    this.displayFormArray(this.cards);
+    console.log('TemporaryCardListlength: ' + this.temporaryCardlist.length);
+    console.log('cardlength: ' + this.cards.length);
+    this.temporaryCard = {
+      'id': 0,
+      'name': '',
+      'dateToFind' : new Date(),
+      'imageUrl': '',
+      'description': ''
+    };
+    if (this.cards.length > 0) {
+      this.temporaryCard.id = this.temporaryCardlist.length;
+      this.temporaryCard.name = this.cards.at(this.cards.length - 1).value.name;
+      this.temporaryCard.dateToFind = this.cards.at(this.cards.length - 1).value.dateToFind;
+      this.temporaryCard.imageUrl = this.cards.at(this.cards.length - 1).value.imageUrl;
+      this.temporaryCard.description = this.cards.at(this.cards.length - 1).value.description;
+      this.temporaryCardlist.push(this.temporaryCard);
+      console.log('temporaryCardlist apres de la carte temporaire' + JSON.stringify(this.temporaryCardlist));
+    } else {
+      this.temporaryCard.id = this.temporaryCardlist.length;
+      this.temporaryCard.name = this.cards.at(this.cards.length).value.name;
+      this.temporaryCard.dateToFind = this.cards.at(this.cards.length).value.dateToFind;
+      this.temporaryCard.imageUrl = this.cards.at(this.cards.length).value.imageUrl;
+      this.temporaryCard.description = this.cards.at(this.cards.length).value.description;
+      this.temporaryCardlist.push(this.temporaryCard);
+      console.log('temporaryCardlist apres de la carte temporaire' + JSON.stringify(this.temporaryCardlist));
+    }
+   // Add a new blank card input
     this.cards.push(this.createCard());
-    console.log('Voici le nouveau contenu du tableau de cards: ' + this.displayFormArray(this.cards));
   }
 
   removeCard(): void {
@@ -113,10 +144,12 @@ export class EditeurComponent implements OnInit {
     return this.timeLineForm.get('cards') as FormArray;
   }
 
-  displayFormArray(arrayOfCard: FormArray) {
-    for (let i = 0; i < arrayOfCard.length; i++) {
+  displayFormArray(arrayOfCards: FormArray) {
+    for (let i = 0; i < arrayOfCards.length; i++) {
+      console.log('Affichage du FormArray: ----');
       console.log('carte N°' + i);
-      console.log('la valeur du nom de la carte: ' + arrayOfCard.at(i).value.name);
+      console.log('la valeur du nom de la carte: ' + arrayOfCards.at(i).value.name);
+      console.log('Fin du FormArray: ----');
     }
   }
 

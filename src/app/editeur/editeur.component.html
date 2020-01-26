@@ -1,3 +1,7 @@
+<h2>
+  Creation d'un nouveau Jeu
+</h2>
+
 <form [formGroup]="timeLineForm" (ngSubmit)="onEditTimeLine(timeLineForm.value)">
   <table>
     <tr>
@@ -10,7 +14,7 @@
       </th>
       <th>
         <input
-          placeholder="Entrez la Categorie"
+          placeholder="Entrez la Categorie du Jeu"
           type="string"
           formControlName="category"
         />
@@ -34,7 +38,7 @@
   </table>
 
   <h2>
-    Ajouter de nouvelles cartes à ce jeu
+    Créér de nouvelles cartes pour ce jeu
   </h2>
 
    <table formArrayName="cards" *ngFor="let card of timeLineForm.get('cards')['controls'] ; let i = index;">
@@ -59,10 +63,10 @@
       </td>
      </tr>
    </table>
-   <button type="button" (click)="onNewCards()"> Affecter les cartes au timeline </button>
+   <button type="button" (click)="onNewCards(cards)"> Affecter les cartes au timeline </button>
 </form>
 <h2>
-  Liste des cartes ajoutées
+  Liste des cartes actuellement affectées a ce Jeu
 </h2>
 <table>
   <tr>
