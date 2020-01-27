@@ -14,6 +14,8 @@ const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/js
 })
 export class GamesService {
   games: Timeline[] = [];
+  cardList: Card[];
+  editedCardList: Card[];
   gamesObservable: Observable<Timeline[]>;
   editedTimeline: Timeline;
   deletedTimeline: Timeline;
@@ -32,18 +34,40 @@ export class GamesService {
       .pipe(tap(dataList => (this.games = dataList)));
   }
 
+  /**
+   *
+   * @param tid : Timeline id
+   * @return: Card array corresponding to the Timeline tid
+   */
+  getCardListObservable(tid): Observable<Card[]> {
+    return this.httpClient
+      .get<Card[]>("/api/timeline/{tid}/card")
+      .pipe(tap(dataList => (this.cardList = dataList)));
+  }
+
+
   deleteTimelinesObservable(i: number): Observable<Timeline> {
     return this.httpClient
     .delete<Timeline>('http://localhost:8080/api/timeline/' + i)
     .pipe(tap(returnedTimeline => (this.deletedTimeline = returnedTimeline)));
   }
 
+  /**
+   *
+   * @param timeline: jeu a créér en BD
+   * @return: jeu
+   */
   createTimelinesObservable(timeline: Timeline): Observable<Timeline> {
     return this.httpClient
     .post<Timeline>('http://localhost:8080/api/timeline', timeline)
     .pipe(tap(returnedTimeline => (this.editedTimeline = returnedTimeline)));
   }
 
+  createCardListObservable(cardList: Card[], tid: number): Observable<Card[]> {
+    return this.httpClient
+      .post<Card[]>('/api/timeline/' + tid + '/card', cardList)
+      .pipe(tap(returnedcardlist => (this.editedCardList = returnedcardlist)));
+  }
 
   TimelineToString(timeline: Timeline){
     console.log('Voici les caracteristiques du timeline: ');
@@ -61,7 +85,7 @@ export class GamesService {
     for (const card of CardTable){
       console.log('Carte id: ' + card.id);
       console.log('Carte name: ' + card.name);
-      console.log('Carte date: ' + card.dateToFind);
+      console.log('Carte date: ' + card.date);
       console.log('Carte URL: ' + card.imageUrl);
       console.log('Carte description: ' + card.description);
     }

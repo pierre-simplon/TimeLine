@@ -44,16 +44,16 @@
    <table formArrayName="cards" *ngFor="let card of timeLineForm.get('cards')['controls'] ; let i = index;">
      <tr [formGroupName]="i">
        <td>
-         <input placeholder="Entrez le nom de la carte" type=string formControlName="name" />
+         <input placeholder="Entrez le nom de la carte" type="string" formControlName="name" />
        </td>
        <td>
-         <input placeholder="Entrez l'URL de son image" type=string formControlName="imageUrl" />
+         <input placeholder="Entrez l'URL de son image" type="string" formControlName="imageUrl" />
        </td>
        <td>
-         <input placeholder="Entrez sa description: " type=string formControlName="description" />
+         <input placeholder="Entrez sa description" type="string" formControlName="description" />
        </td>
        <td>
-        <input placeholder="Entrez la date à trouver: " type=date formControlName="dateToFind" />
+        <input placeholder="Entrez la date à trouver" type="date" formControlName="date" />
       </td>
        <td>
          <button type="button" (click)="addCard()"> ajouter carte </button>
@@ -94,7 +94,7 @@
       {{card.name}}
     </th>
     <th>
-      {{ card.dateToFind }}
+      {{ card.date }}
     </th>
     <th>
       {{card.imageUrl}}

@@ -38,23 +38,18 @@ export class JeuComponent implements OnInit {
     let id = (this.routes.snapshot.params['id']);
     id = +id + 1;
 
-
-    this.gameservice.gamesObservable.subscribe(timelineList => {
-      this.timeline = timelineList.find(
-        (s) => {
-          return s.id === id;
-        });
-      this.cartesADeviner = this.timeline.cardList;
-      this.nouvelleCarte();
+    // Gather timeline & cards list from DB and then launch a first guess
+    this.gameservice.gamesObservable
+    .subscribe(timelineList => {this.timeline = timelineList.find((s) => {return s.id === id;});
+                                this.cartesADeviner = this.timeline.cardList;
+                                this.nouvelleCarte();
     });
   }
 
-
-
   onReponse(card) {
-   if (card.reponse === this.cartesADeviner[this.indexCarteEnCours].dateToFind) {
-     console.log('la date saisie est: ' + card.reponse );
-     console.log('la date a deviner est: ' + this.cartesADeviner[this.indexCarteEnCours].dateToFind );
+  console.log('la date saisie est : ' + card.reponse);
+  console.log('la date a deviner est: ' + this.cartesADeviner[this.indexCarteEnCours].date);
+  if (card.reponse === this.cartesADeviner[this.indexCarteEnCours].date) {
      this.winner(this.indexCarteEnCours);
    } else { alert('ESSAYES ENCORE'); }
  }
@@ -76,14 +71,9 @@ export class JeuComponent implements OnInit {
 
  nouvelleCarte(){
   this.rnd = this.getRandomInt(this.cartesADeviner.length);
-  this.indexCarteEnCours=this.rnd;
+  this.indexCarteEnCours = this.rnd;
   this.cheminURL = this.cartesADeviner[this.indexCarteEnCours].imageUrl;
-  console.log("Ca marche id: " + this.timeline.cardList[this.indexCarteEnCours].id);
-  console.log("Ca marche name: " + this.timeline.cardList[this.indexCarteEnCours].name);
-  console.log("Ca marche description: " + this.timeline.cardList[this.indexCarteEnCours].description);
-  console.log("Ca marche URL: " + this.timeline.cardList[this.indexCarteEnCours].imageUrl);
-  console.log("Année de la date de la carte: " + this.timeline.cardList[this.indexCarteEnCours].dateToFind);
-  console.log("Taile du tableau: "+this.cartesADeviner.length);
+  console.log("cardlist stringify" + JSON.stringify(this.timeline.cardList));
  }
 
  getRandomInt(max) {

@@ -62,6 +62,10 @@ export class EditeurComponent implements OnInit {
     // tslint:disable-next-line: max-line-length
     console.log('Creation du timeline suivant retourné par httpClient: ');
     this.gameservice.createTimelinesObservable(this.temporaryTimeline).subscribe(timeline => this.temporaryTimeline = timeline);
+    console.log('affectation de liste des carte au timeline en BD');
+    this.gameservice.createCardListObservable(this.temporaryCardlist, this.temporaryTimeline.id)
+    .subscribe((cardlist: Card[]) => this.temporaryCardlist = cardlist);
+    console.log('affichage du timeline apres mise à jour BD de la liste des cartes:')
     this.gameservice.TimelineToString(this.temporaryTimeline);
   }
 
@@ -74,7 +78,7 @@ export class EditeurComponent implements OnInit {
     this.temporaryCard = {
       'id': 0,
       'name': '',
-      'dateToFind' : new Date(),
+      'date' : new Date(),
       'imageUrl': '',
       'description': ''
     };
@@ -82,7 +86,7 @@ export class EditeurComponent implements OnInit {
     for (let i = 0; i < this.cards.length; i++) {
       this.temporaryCard.id = this.temporaryCardlist.length;
       this.temporaryCard.name = cards.at(i).value.name;
-      this.temporaryCard.dateToFind = cards.at(i).value.dateToFind;
+      this.temporaryCard.date = cards.at(i).value.date;
       this.temporaryCard.imageUrl = cards.at(i).value.imageUrl;
       this.temporaryCard.description = cards.at(i).value.description;
       console.log('la carte temporaire avant affectation: ' + JSON.stringify(this.temporaryCard));
@@ -110,14 +114,14 @@ export class EditeurComponent implements OnInit {
     this.temporaryCard = {
       'id': 0,
       'name': '',
-      'dateToFind' : new Date(),
+      'date' : new Date(),
       'imageUrl': '',
       'description': ''
     };
     if (this.cards.length > 0) {
       this.temporaryCard.id = this.temporaryCardlist.length;
       this.temporaryCard.name = this.cards.at(this.cards.length - 1).value.name;
-      this.temporaryCard.dateToFind = this.cards.at(this.cards.length - 1).value.dateToFind;
+      this.temporaryCard.date = this.cards.at(this.cards.length - 1).value.date;
       this.temporaryCard.imageUrl = this.cards.at(this.cards.length - 1).value.imageUrl;
       this.temporaryCard.description = this.cards.at(this.cards.length - 1).value.description;
       this.temporaryCardlist.push(this.temporaryCard);
@@ -125,7 +129,7 @@ export class EditeurComponent implements OnInit {
     } else {
       this.temporaryCard.id = this.temporaryCardlist.length;
       this.temporaryCard.name = this.cards.at(this.cards.length).value.name;
-      this.temporaryCard.dateToFind = this.cards.at(this.cards.length).value.dateToFind;
+      this.temporaryCard.date = this.cards.at(this.cards.length).value.date;
       this.temporaryCard.imageUrl = this.cards.at(this.cards.length).value.imageUrl;
       this.temporaryCard.description = this.cards.at(this.cards.length).value.description;
       this.temporaryCardlist.push(this.temporaryCard);

@@ -1,7 +1,7 @@
 export interface Card {
   id: number;
   name: string;
-  dateToFind: Date;
+  date: Date;
   imageUrl: string;
   description: string;
 }
