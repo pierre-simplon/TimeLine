@@ -41,7 +41,7 @@ export class GamesService {
    */
   getCardListObservable(tid): Observable<Card[]> {
     return this.httpClient
-      .get<Card[]>("/api/timeline/{tid}/card")
+      .get<Card[]>(`/api/timeline/${tid}/card`)
       .pipe(tap(dataList => (this.cardList = dataList)));
   }
 
@@ -63,9 +63,14 @@ export class GamesService {
     .pipe(tap(returnedTimeline => (this.editedTimeline = returnedTimeline)));
   }
 
+  /**
+   *
+   * @param cardList : tableau de carte
+   * @param tid : id du timeline ou les cartes seront affectées
+   */
   createCardListObservable(cardList: Card[], tid: number): Observable<Card[]> {
     return this.httpClient
-      .post<Card[]>('/api/timeline/' + tid + '/card', cardList)
+      .post<Card[]>(`/api/timeline/${tid}/card`, cardList)
       .pipe(tap(returnedcardlist => (this.editedCardList = returnedcardlist)));
   }
 
@@ -80,7 +85,7 @@ export class GamesService {
   }
 
   CardTableToString(CardTable: Card[]){
-    if (CardTable.length >0) {
+    if (CardTable.length > 0) {
     console.log('Voici le tableau des cartes: ');
     for (const card of CardTable){
       console.log('Carte id: ' + card.id);

@@ -2,7 +2,7 @@
   <body>
     <form [formGroup]="jeuForm" (ngSubmit)="onReponse(jeuForm.value)">
       <div>
-        <input placeholder="Entrez la date" type="date" formControlName="reponse"/>
+        <input placeholder="Entrez la date" type="year" formControlName="reponse"/>
         <button type="submit">Deviner</button>
       </div>
     </form>

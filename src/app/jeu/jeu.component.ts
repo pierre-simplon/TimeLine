@@ -13,8 +13,6 @@ import { Card } from '../interfaceCard';
   styleUrls: ['./jeu.component.css']
 })
 export class JeuComponent implements OnInit {
-
-
   rnd: number;
   id: number;
   timeline: Timeline;
@@ -46,10 +44,15 @@ export class JeuComponent implements OnInit {
     });
   }
 
+  getDateYear(card: Card) {
+    return new Date(card.date).getFullYear();
+  }
+
   onReponse(card) {
-  console.log('la date saisie est : ' + card.reponse);
-  console.log('la date a deviner est: ' + this.cartesADeviner[this.indexCarteEnCours].date);
-  if (card.reponse === this.cartesADeviner[this.indexCarteEnCours].date) {
+    const anneeCarteADeviner = this.getDateYear(this.cartesADeviner[this.indexCarteEnCours]);
+    console.log('la date saisie est : ' + card.reponse);
+    console.log('la date a deviner est: ' + anneeCarteADeviner);
+    if (card.reponse === anneeCarteADeviner.toString()) {
      this.winner(this.indexCarteEnCours);
    } else { alert('ESSAYES ENCORE'); }
  }
@@ -69,11 +72,11 @@ export class JeuComponent implements OnInit {
    this.finDeJeu();
  }
 
- nouvelleCarte(){
+ nouvelleCarte() {
   this.rnd = this.getRandomInt(this.cartesADeviner.length);
   this.indexCarteEnCours = this.rnd;
   this.cheminURL = this.cartesADeviner[this.indexCarteEnCours].imageUrl;
-  console.log("cardlist stringify" + JSON.stringify(this.timeline.cardList));
+  console.log('cardlist stringify' + JSON.stringify(this.timeline.cardList));
  }
 
  getRandomInt(max) {
