@@ -4,4 +4,5 @@ export interface Card {
   date: Date;
   imageUrl: string;
   description: string;
+  isFirstCard: boolean;
 }

@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Timeline } from '../interfaceTimeline';
 import { Card } from '../interfaceCard';
 import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-editeur',
@@ -18,6 +19,7 @@ export class EditeurComponent implements OnInit {
   temporaryCardlist: Card[];
   temporaryTimeline: Timeline;
   temporaryCard: Card;
+  firstCard: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,7 +41,7 @@ export class EditeurComponent implements OnInit {
       category: '',
       creationDate: new Date(),
       updateDate: new Date(),
-      cards: this.formBuilder.array([this.createCard()])
+      cards: this.formBuilder.array([this.createEmptyCard()])
     });
   }
 
@@ -80,9 +82,11 @@ export class EditeurComponent implements OnInit {
       'name': '',
       'date' : new Date(),
       'imageUrl': '',
-      'description': ''
+      'description': '',
+      'isFirstCard': true
     };
     console.log('longueur de cards:' + this.cards.length);
+    console.log(' First Card ? :' + this.firstCard);
     for (let i = 0; i < this.cards.length; i++) {
       this.temporaryCard.id = this.temporaryCardlist.length;
       this.temporaryCard.name = cards.at(i).value.name;
@@ -96,7 +100,7 @@ export class EditeurComponent implements OnInit {
     }
   }
 
-  createCard(): FormGroup {
+  createEmptyCard(): FormGroup {
     return this.formBuilder.group({
     name: '',
     imageUrl: '',
@@ -105,8 +109,8 @@ export class EditeurComponent implements OnInit {
     });
   }
 
-  addCard(): void {
-    console.log('le FormArray envoyé par addCard est:');
+  addEmptyCardForm(): void {
+    console.log('le FormArray envoyé par addEmptyCardForm est:');
     this.cards = this.timeLineForm.get('cards') as FormArray;
     this.displayFormArray(this.cards);
     console.log('TemporaryCardListlength: ' + this.temporaryCardlist.length);
@@ -116,14 +120,17 @@ export class EditeurComponent implements OnInit {
       'name': '',
       'date' : new Date(),
       'imageUrl': '',
-      'description': ''
+      'description': '',
+      'isFirstCard': true
     };
     if (this.cards.length > 0) {
+      console.log('Il y a plus d\'une carte');
       this.temporaryCard.id = this.temporaryCardlist.length;
       this.temporaryCard.name = this.cards.at(this.cards.length - 1).value.name;
       this.temporaryCard.date = this.cards.at(this.cards.length - 1).value.date;
       this.temporaryCard.imageUrl = this.cards.at(this.cards.length - 1).value.imageUrl;
       this.temporaryCard.description = this.cards.at(this.cards.length - 1).value.description;
+      this.temporaryCard.isFirstCard = false;
       this.temporaryCardlist.push(this.temporaryCard);
       console.log('temporaryCardlist apres de la carte temporaire' + JSON.stringify(this.temporaryCardlist));
     } else {
@@ -132,16 +139,20 @@ export class EditeurComponent implements OnInit {
       this.temporaryCard.date = this.cards.at(this.cards.length).value.date;
       this.temporaryCard.imageUrl = this.cards.at(this.cards.length).value.imageUrl;
       this.temporaryCard.description = this.cards.at(this.cards.length).value.description;
+      this.temporaryCard.isFirstCard = true;
       this.temporaryCardlist.push(this.temporaryCard);
       console.log('temporaryCardlist apres de la carte temporaire' + JSON.stringify(this.temporaryCardlist));
     }
    // Add a new blank card input
-    this.cards.push(this.createCard());
+    this.cards.push(this.createEmptyCard());
   }
 
   removeCard(): void {
     this.cards = this.timeLineForm.get('cards') as FormArray;
     this.cards.removeAt(this.cards.length - 1);
+    if (this.cards.length === 1) {
+      this.temporaryCard.isFirstCard = true;
+    }
   }
 
   getCards() {

@@ -56,10 +56,10 @@
         <input placeholder="Entrez la date à trouver" type="date" formControlName="date" />
       </td>
        <td>
-         <button type="button" (click)="addCard()"> ajouter carte </button>
+         <button type="button" (click)="addEmptyCardForm()"> ajouter carte </button>
        </td>
        <td>
-        <button type="button" (click)="removeCard()"> supprimer carte </button>
+        <button type="button" (click)="removeCard()" *ngIf="!this.temporaryCard.isFirstCard"> supprimer carte </button>
       </td>
      </tr>
    </table>

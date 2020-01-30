@@ -3,7 +3,7 @@
     <form [formGroup]="jeuForm" (ngSubmit)="onReponse(jeuForm.value)">
       <div>
         <input placeholder="Entrez la date" type="year" formControlName="reponse"/>
-        <button type="submit">Deviner</button>
+        <button type="submit" *ngIf="!this.gameOver">Deviner</button>
       </div>
     </form>
   </body>
@@ -23,6 +23,7 @@
 <h1>
   Carte(s) trouvée(s)
 </h1>
+
 <table>
   <tr *ngFor="let card of this.cartesTrouvees">
     <td>

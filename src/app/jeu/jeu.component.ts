@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, ModuleWithComponentFactories } from '@angular/core';
+import { Component, OnInit, Input, ModuleWithComponentFactories, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { GamesService } from '../games.service';
 import { Timeline } from '../interfaceTimeline';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Card } from '../interfaceCard';
 
@@ -12,7 +12,7 @@ import { Card } from '../interfaceCard';
   templateUrl: './jeu.component.html',
   styleUrls: ['./jeu.component.css']
 })
-export class JeuComponent implements OnInit {
+export class JeuComponent implements OnInit, OnDestroy {
   rnd: number;
   id: number;
   timeline: Timeline;
@@ -21,6 +21,8 @@ export class JeuComponent implements OnInit {
   indexCarteEnCours;
   cartesTrouvees: Card[] = [];
   cartesADeviner: Card[] = [];
+  gamesSubscription: Subscription;
+  gameOver: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,13 +37,18 @@ export class JeuComponent implements OnInit {
   ngOnInit() {
     let id = (this.routes.snapshot.params['id']);
     id = +id + 1;
+    this.gameOver = false;
 
     // Gather timeline & cards list from DB and then launch a first guess
-    this.gameservice.gamesObservable
-    .subscribe(timelineList => {this.timeline = timelineList.find((s) => {return s.id === id;});
+    this.gamesSubscription = this.gameservice.gamesObservable
+    .subscribe(timelineList => {this.timeline = timelineList.find((s) => s.id === id);
                                 this.cartesADeviner = this.timeline.cardList;
                                 this.nouvelleCarte();
     });
+  }
+
+  ngOnDestroy() {
+    this.gamesSubscription.unsubscribe();
   }
 
   getDateYear(card: Card) {
@@ -84,8 +91,8 @@ export class JeuComponent implements OnInit {
 }
 
  finDeJeu(){
-  if (this.cartesADeviner.length==1) {
-    alert('Il n\'y a plus de carte'); //TODO cacher le bouton deviner
+  if (this.cartesADeviner.length === 1) {
+    this.gameOver = true;
   } else {
     this.nouvelleCarte();
   }

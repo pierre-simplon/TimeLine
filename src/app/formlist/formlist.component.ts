@@ -36,12 +36,7 @@ export class FormlistComponent implements OnInit {
     console.log('NewTimeLine!');
   }
 
-
   delete(i) {
     this.gameService.deleteTimelinesObservable(i).subscribe(() => {this.games = this.gameService.getTimelinesObservable(); });
   }
-
-
-
-
 }
