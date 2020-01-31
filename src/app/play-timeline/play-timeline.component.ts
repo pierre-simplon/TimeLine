@@ -9,10 +9,10 @@ import { Card } from '../interfaceCard';
 
 @Component({
   selector: 'app-jeu',
-  templateUrl: './jeu.component.html',
-  styleUrls: ['./jeu.component.css']
+  templateUrl: './play-timeline.component.html',
+  styleUrls: ['./play-timeline.component.css']
 })
-export class JeuComponent implements OnInit, OnDestroy {
+export class playTimelineComponent implements OnInit, OnDestroy {
   rnd: number;
   id: number;
   timeline: Timeline;

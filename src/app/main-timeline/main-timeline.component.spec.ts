@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormlistComponent } from './formlist.component';
+import { mainTimelineComponent } from './main-timeline.component';
 
 describe('FormlistComponent', () => {
-  let component: FormlistComponent;
-  let fixture: ComponentFixture<FormlistComponent>;
+  let component: mainTimelineComponent;
+  let fixture: ComponentFixture<mainTimelineComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormlistComponent ]
+      declarations: [ mainTimelineComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormlistComponent);
+    fixture = TestBed.createComponent(mainTimelineComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

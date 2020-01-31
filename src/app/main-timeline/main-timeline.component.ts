@@ -6,10 +6,10 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-formlist',
-  templateUrl: './formlist.component.html',
-  styleUrls: ['./formlist.component.css']
+  templateUrl: './main-timeline.component.html',
+  styleUrls: ['./main-timeline.component.css']
 })
-export class FormlistComponent implements OnInit {
+export class mainTimelineComponent implements OnInit {
   gameList = this.gameService.gamesObservable;
   gameForm;
   games: Observable<Timeline[]>;

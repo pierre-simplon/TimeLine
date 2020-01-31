@@ -5,18 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
-import { FormlistComponent } from './formlist/formlist.component';
+import { mainTimelineComponent } from './main-timeline/main-timeline.component';
 import { GamesService } from './games.service';
 import { HttpClientModule} from '@angular/common/http';
-import { JeuComponent } from './jeu/jeu.component';
+import { playTimelineComponent } from './play-timeline/play-timeline.component';
 import { CreateTimelineComponent } from './create-timeline/create-timeline.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
-    FormlistComponent,
-    JeuComponent,
+    mainTimelineComponent,
+    playTimelineComponent,
     CreateTimelineComponent
   ],
   imports: [
