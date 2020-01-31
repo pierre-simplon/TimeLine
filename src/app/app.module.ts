@@ -9,7 +9,7 @@ import { FormlistComponent } from './formlist/formlist.component';
 import { GamesService } from './games.service';
 import { HttpClientModule} from '@angular/common/http';
 import { JeuComponent } from './jeu/jeu.component';
-import { EditeurComponent } from './editeur/editeur.component';
+import { CreateTimelineComponent } from './create-timeline/create-timeline.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { EditeurComponent } from './editeur/editeur.component';
     TopBarComponent,
     FormlistComponent,
     JeuComponent,
-    EditeurComponent
+    CreateTimelineComponent
   ],
   imports: [
     BrowserModule,

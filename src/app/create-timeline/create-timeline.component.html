@@ -2,7 +2,7 @@
   Creation d'un nouveau Jeu
 </h2>
 
-<form [formGroup]="timeLineForm" (ngSubmit)="onEditTimeLine(timeLineForm.value)">
+<form [formGroup]="timeLineForm" (ngSubmit)="onCreateTimeLine(timeLineForm.value)">
   <table>
     <tr>
       <th>
@@ -63,7 +63,7 @@
       </td>
      </tr>
    </table>
-   <button type="button" (click)="onNewCards(cards)"> Affecter les cartes au timeline </button>
+   <button type="button" (click)="onPushCardsToTimeline(cardsFormArray)"> Affecter les cartes au timeline </button>
 </form>
 <h2>
   Liste des cartes actuellement affectées a ce Jeu
@@ -104,3 +104,4 @@
     </th>
   </tr>
 </table>
+
