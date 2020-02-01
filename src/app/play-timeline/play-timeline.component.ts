@@ -12,7 +12,7 @@ import { Card } from '../interfaceCard';
   templateUrl: './play-timeline.component.html',
   styleUrls: ['./play-timeline.component.css']
 })
-export class playTimelineComponent implements OnInit, OnDestroy {
+export class PlayTimelineComponent implements OnInit, OnDestroy {
   rnd: number;
   id: number;
   timeline: Timeline;
@@ -35,7 +35,7 @@ export class playTimelineComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    let id = (this.routes.snapshot.params['id']);
+    let id = (this.routes.snapshot.params.id);
     id = +id + 1;
     this.gameOver = false;
 
@@ -73,7 +73,7 @@ export class playTimelineComponent implements OnInit, OnDestroy {
    return jeu;
  }
 
- winner(index){
+ winner(index) {
    this.cartesTrouvees.push(this.timeline.cardList[index]);
    this.cartesADeviner.splice(index, 1);
    this.finDeJeu();
@@ -90,7 +90,7 @@ export class playTimelineComponent implements OnInit, OnDestroy {
   return Math.floor(Math.random() * max);
 }
 
- finDeJeu(){
+ finDeJeu() {
   if (this.cartesADeviner.length === 1) {
     this.gameOver = true;
   } else {

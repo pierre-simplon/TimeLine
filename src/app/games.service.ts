@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Timeline } from "./interfaceTimeline";
-import { Observable } from "rxjs";
-import { tap } from "rxjs/operators";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { Timeline } from './interfaceTimeline';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 import { HttpHeaders } from '@angular/common/http';
 import { Card } from './interfaceCard';
@@ -19,6 +19,7 @@ export class GamesService {
   gamesObservable: Observable<Timeline[]>;
   editedTimeline: Timeline;
   deletedTimeline: Timeline;
+  formBuilder: any;
 
   constructor(private httpClient: HttpClient) {
     this.gamesObservable = this.getTimelinesObservable();
@@ -30,7 +31,7 @@ export class GamesService {
    */
   getTimelinesObservable(): Observable<Timeline[]> {
     return this.httpClient
-      .get<Timeline[]>("http://localhost:8080/api/timeline")
+      .get<Timeline[]>('http://localhost:8080/api/timeline')
       .pipe(tap(dataList => (this.games = dataList)));
   }
 
@@ -74,7 +75,16 @@ export class GamesService {
       .pipe(tap(returnedcardlist => (this.editedCardList = returnedcardlist)));
   }
 
-  TimelineToString(timeline: Timeline){
+  createEmptyCard() {
+    return this.formBuilder.group({
+    name: '',
+    imageUrl: '',
+    description: '',
+    dateToFind: new Date(2020, 12, 12)
+    });
+  }
+
+  TimelineToString(timeline: Timeline) {
     console.log('Voici les caracteristiques du timeline: ');
     console.log(timeline.id);
     console.log(timeline.name);
@@ -84,10 +94,10 @@ export class GamesService {
     this.CardTableToString(timeline.cardList);
   }
 
-  CardTableToString(CardTable: Card[]){
+  CardTableToString(CardTable: Card[]) {
     if (CardTable.length > 0) {
     console.log('Voici le tableau des cartes: ');
-    for (const card of CardTable){
+    for (const card of CardTable) {
       console.log('Carte id: ' + card.id);
       console.log('Carte name: ' + card.name);
       console.log('Carte date: ' + card.date);

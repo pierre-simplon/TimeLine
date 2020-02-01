@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   templateUrl: './main-timeline.component.html',
   styleUrls: ['./main-timeline.component.css']
 })
-export class mainTimelineComponent implements OnInit {
+export class MainTimelineComponent implements OnInit {
   gameList = this.gameService.gamesObservable;
   gameForm;
   games: Observable<Timeline[]>;

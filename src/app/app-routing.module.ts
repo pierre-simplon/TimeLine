@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { mainTimelineComponent } from './main-timeline/main-timeline.component';
-import { playTimelineComponent } from './play-timeline/play-timeline.component';
+import { MainTimelineComponent } from './main-timeline/main-timeline.component';
+import { PlayTimelineComponent } from './play-timeline/play-timeline.component';
 import { CreateTimelineComponent } from './create-timeline/create-timeline.component';
+import { CreateCardsComponent } from './create-cards/create-cards.component';
 
 
 
 
 const routes: Routes = [
-  { path: '', component: mainTimelineComponent },
-  { path: 'jeu/:id', component: playTimelineComponent},
+  { path: '', component: MainTimelineComponent },
+  { path: 'jeu/:id', component: PlayTimelineComponent},
   { path: 'createTimeline', component: CreateTimelineComponent},
+  { path: 'createCards', component: CreateCardsComponent}
 ];
 
 @NgModule({

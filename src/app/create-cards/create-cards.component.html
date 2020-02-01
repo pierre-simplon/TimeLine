@@ -1,0 +1,68 @@
+<h2>
+  Créér de nouvelles cartes pour ce jeu
+</h2>
+
+<table formArrayName="cardsFormArray" *ngFor="let cardForm of cardsFormArray ; let cardFormArrayIndex = index;">
+    <tr [formGroupName]="cardFormArrayIndex">
+      <td>
+        <input placeholder="Entrez le nom de la carte" type="string" formControlName="name" />
+      </td>
+      <td>
+        <input placeholder="Entrez l'URL de son image" type="string" formControlName="imageUrl" />
+      </td>
+      <td>
+        <input placeholder="Entrez sa description" type="string" formControlName="description" />
+      </td>
+      <td>
+      <input placeholder="Entrez la date à trouver" type="date" formControlName="date" />
+    </td>
+      <td>
+        <button type="button" (click)="addEmptyCardForm()"> ajouter carte </button>
+      </td>
+      <td>
+      <button type="button" (click)="removeCard()" *ngIf="!this.temporaryCard.isFirstCard"> supprimer carte </button>
+    </td>
+    </tr>
+  </table>
+  <button type="button" (click)="onPushCardsToTimeline(cardsFormArray)"> Affecter les cartes au timeline </button>
+
+<h2>
+  Liste des cartes actuellement affectées a ce Jeu
+</h2>
+
+<table>
+  <tr>
+    <th>
+      id
+    </th>
+    <th>
+      Name
+    </th>
+    <th>
+      Date
+    </th>
+    <th>
+      URL
+    </th>
+    <th>
+      Description
+    </th>
+  </tr>
+  <tr *ngFor="let card of this.temporaryCardlist">
+    <th>
+      {{card.id}}
+    </th>
+    <th>
+      {{card.name}}
+    </th>
+    <th>
+      {{ card.date }}
+    </th>
+    <th>
+      {{card.imageUrl}}
+    </th>
+    <th>
+      {{card.description}}
+    </th>
+  </tr>
+</table>
